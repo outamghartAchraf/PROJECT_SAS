@@ -213,20 +213,26 @@ function EnregistreRetour() {
 //12 Afficher les Livre empruntes par un abonne done 
 
 function AfficherEmpruntsParAbonne() {
-    let abonneId = parseInt(prompt("enter id de l abonne :"));
+    let abonneId = parseInt(prompt("Entrez l'ID de l'abonné :"));
+    
+    
     let empruntAbonne = emprunts.filter(emprunt => emprunt.abonneId === abonneId);
     
-    if(empruntAbonne.length === 0) {
-        console.log("aucun emprunt pour cet abonne");
-    }else{
-        console.log("=== liste des livres empruntes par aboone ===");
+    if (empruntAbonne.length === 0) {
+        console.log("Aucun emprunt pour cet abonné.");
+    } else {
+        console.log("=== Liste des livres empruntés par l'abonné ===");
         empruntAbonne.forEach(emprunt => {
             let livre = livres.find(livre => livre.id_livre === emprunt.id_livre);
-            console.log(`ID : ${livre.id_livre}, Titre : ${livre.titre}, Auteur : ${livre.auteur}, Annee : ${livre.annee} `);
-        })
-
+            if (livre) {
+                console.log(`ID : ${livre.id_livre}, Titre : ${livre.titre}, Auteur : ${livre.auteur}, Année : ${livre.annee}`);
+            } else {
+                console.log(`Livre avec ID ${emprunt.id_livre} non trouvé.`);
+            }
+        });
     }
 }
+
 
 
 
