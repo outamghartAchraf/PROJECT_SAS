@@ -44,7 +44,7 @@ let emprunts = [
 
 
 
-// 1️ Introduire livre
+// 1 Introduire livre
 
 function IntroduireLivre() {
     let id_livre = livres.length + 1;
@@ -59,7 +59,7 @@ function IntroduireLivre() {
     console.log("Livre access add ");
 }
 
-// 2️ Ajouter plusieurs livres
+// 2 Ajouter plusieurs livres
 
 function AjouterPlusieursLivres() {
     let nombre = parseInt(prompt("Combien de livres ajouter ? "));
@@ -69,7 +69,7 @@ function AjouterPlusieursLivres() {
     }
 }
 
-// 3️ Afficher tous les livres
+// 3 Afficher tous les livres
 
 function AfficherTousLesLivres() {
     console.log("=== Liste des livres ===");
@@ -83,7 +83,7 @@ function AfficherTousLesLivres() {
 
 }
 
-// 4️ Trier les livres par titre
+// 4 Trier les livres par titre
 
 function TrierLivresParTitre() {
     let ordre = prompt("Choisisse numbre of ordre (1-ascendant / 2-descendant) : ");
@@ -101,7 +101,7 @@ function TrierLivresParTitre() {
     AfficherTousLesLivres();
 }
 
-// 5️ Trier les livres par année
+// 5 Trier les livres par année
 
 function TrierLivresParAnnee() {
     let ordre = prompt("Choisisse numbre of ordre (1-ascendant / 2-descendant) : ");
@@ -119,7 +119,7 @@ function TrierLivresParAnnee() {
     AfficherTousLesLivres();
 }
 
-// 6️ Afficher uniquement les livres disponibles
+// 6 Afficher uniquement les livres disponibles
 
 function AfficherLivresDisponibles() {
     console.log("=== Liste des livres disponibles ===");
@@ -135,7 +135,7 @@ function AfficherLivresDisponibles() {
     }
 }
 
-// 7️ Rechercher un livre par ID
+// 7 Rechercher un livre par ID
 
 function RechercherLivreParID() {
     let id = parseInt(prompt("Entre id livre search : "));
