@@ -39,12 +39,15 @@ let abonnes = [
 { id: 1, nom: "Dupont", prenom: "Alice", email: "alice@mail.com" } 
 ]; 
 let emprunts = [ 
-{ abonneId: 1, id_livre: "123", dateEmprunt: "2025-09-22" } 
+{ abonneId: 1, id_livre: 1, dateEmprunt: "2025-09-22" } 
 ]; 
 
 
 
+ 
+// ──────────────────────────────
 // 1 Introduire livre
+// ──────────────────────────────
 
 function IntroduireLivre() {
     let id_livre = livres.length + 1;
@@ -59,7 +62,10 @@ function IntroduireLivre() {
     console.log("Livre access add ");
 }
 
+
+// ──────────────────────────────
 // 2 Ajouter plusieurs livres
+// ──────────────────────────────
 
 function AjouterPlusieursLivres() {
     let nombre = parseInt(prompt("Combien de livres ajouter ? "));
@@ -69,7 +75,11 @@ function AjouterPlusieursLivres() {
     }
 }
 
+ 
+
+// ──────────────────────────────
 // 3 Afficher tous les livres
+// ──────────────────────────────
 
 function AfficherTousLesLivres() {
     console.log("=== Liste des livres ===");
@@ -83,7 +93,12 @@ function AfficherTousLesLivres() {
 
 }
 
+
+
+// ──────────────────────────────
 // 4 Trier les livres par titre
+// ──────────────────────────────
+
 
 function TrierLivresParTitre() {
     let ordre = prompt("Choisisse numbre of ordre (1-ascendant / 2-descendant) : ");
@@ -101,7 +116,11 @@ function TrierLivresParTitre() {
     AfficherTousLesLivres();
 }
 
+
+
+// ──────────────────────────────
 // 5 Trier les livres par année
+// ──────────────────────────────
 
 function TrierLivresParAnnee() {
     let ordre = prompt("Choisisse numbre of ordre (1-ascendant / 2-descendant) : ");
@@ -119,7 +138,10 @@ function TrierLivresParAnnee() {
     AfficherTousLesLivres();
 }
 
+
+// ──────────────────────────────
 // 6 Afficher uniquement les livres disponibles
+// ──────────────────────────────
 
 function AfficherLivresDisponibles() {
     console.log("=== Liste des livres disponibles ===");
@@ -135,7 +157,11 @@ function AfficherLivresDisponibles() {
     }
 }
 
+// 
+
+// ──────────────────────────────
 // 7 Rechercher un livre par ID
+// ──────────────────────────────
 
 function RechercherLivreParID() {
     let id = parseInt(prompt("Entre id livre search : "));
@@ -149,7 +175,10 @@ function RechercherLivreParID() {
     }
 }
 
+ 
+// ──────────────────────────────
 // 8 Ajout un abonee 
+// ──────────────────────────────
 
 function AjouterAbonne() {
     let id = abonnes.length + 1 ;
@@ -163,7 +192,10 @@ function AjouterAbonne() {
 
 }
 
-//9 Afficher tous les abonnes 
+
+// ──────────────────────────────
+// 9 Afficher tous les abonnes 
+// ──────────────────────────────
 
 function AfficherTousLesAnonnes() {
     console.log("=== Liste All abonnes ===");
@@ -177,25 +209,44 @@ function AfficherTousLesAnonnes() {
 
 }
 
-//10 Enregistrer un emprunt
+
+// ──────────────────────────────
+// 10 Enregistrer un emprunt
+// ──────────────────────────────
 
 function EnregistrerEmprunt() {
-    let abonneId = parseInt(prompt("enter id de la abonne :"));
-    let id_livre = parseInt(prompt("enter id du livre :"));
+    let id_abonnne = prompt("enter id abonne :");
+    let id_livre = prompt("enter id livre :");
 
-    let livre = livres.find(livre => livre.id_livre === id_livre && livre.disponible);
-    if(livre) {
-        livre.disponible = false;
-        let dateEmprunt = new Date().toISOString().split('T')[0];
-        emprunts.push({abonneId, id_livre, dateEmprunt});
-        console.log("emprunt enregistre avec succes");
-
+    let livre = livres.find((livre) => livre.id_livre == id_livre && livre.disponible);
+    if(livre){
+        let abonne = abonnes.find((abonne) => abonne.id == id_abonnne);
+        let date = new Date().toISOString().split('T')[0] ;
+        if(abonne){
+            let Newemprunt = {
+                id_abonnne : id_abonnne,
+                id_livre : id_livre,
+                date_emprunt : date,
+            }
+            emprunts.push(Newemprunt);
+            livre.disponible = false ;
+            console.log(` Emprunt add succesflly :
+             Livre : ${livre.titre}
+            Abonné : ${abonne.nom}
+            date_emprunt : ${date}
+            `);
+        }else{
+            console.log("abonne not found")
+        }
     }else{
-        console.log("livre not found disponible of emprunt");
+        console.log('livre not found disponible for emprunt')
     }
 }
 
-//11 Enregistre un retour
+
+// ──────────────────────────────
+// 11 Enregistre un retour
+// ──────────────────────────────
 
 function EnregistreRetour() {
     let id_livre = parseInt(prompt("enter id livre a retuen :"));
@@ -210,29 +261,31 @@ function EnregistreRetour() {
 
 }
 
-//12 Afficher les Livre empruntes par un abonne done 
+// ──────────────────────────────
+// 12 Afficher les Livre empruntes par un abonne done 
+// ──────────────────────────────
 
+ 
 function AfficherEmpruntsParAbonne() {
-    let abonneId = parseInt(prompt("Entrez l'ID de l'abonné :"));
+    let abonneId = parseInt(prompt("Enter id of abonne :"));
     
     
     let empruntAbonne = emprunts.filter(emprunt => emprunt.abonneId === abonneId);
     
     if (empruntAbonne.length === 0) {
-        console.log("Aucun emprunt pour cet abonné.");
+        console.log("not emprunt of this abonne.");
     } else {
-        console.log("=== Liste des livres empruntés par l'abonné ===");
+        console.log("=== Liste livres emprunt par Abonne ===");
         empruntAbonne.forEach(emprunt => {
             let livre = livres.find(livre => livre.id_livre === emprunt.id_livre);
             if (livre) {
                 console.log(`ID : ${livre.id_livre}, Titre : ${livre.titre}, Auteur : ${livre.auteur}, Année : ${livre.annee}`);
             } else {
-                console.log(`Livre avec ID ${emprunt.id_livre} non trouvé.`);
+                console.log('this livre not found');
             }
         });
     }
 }
-
 
 
 
